@@ -30,7 +30,7 @@ const doctorSchema = new mongoose.Schema({
       required: true,
     },
     experience: {
-      type: string,
+      type: String,
       required: true,
     },
     about: {
@@ -39,7 +39,7 @@ const doctorSchema = new mongoose.Schema({
     },
     available: {
       type: Boolean,
-      required: true,
+      default: true,
     },
     fees: {
       type: Number,
