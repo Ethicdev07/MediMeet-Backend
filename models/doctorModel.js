@@ -43,11 +43,11 @@ const doctorSchema = new mongoose.Schema({
     },
     fees: {
       type: Number,
-      required: true,
+      required: [true, 'fees are required'],
     },
     address: {
       type: Object,
-      required: true,
+      required: [true, 'address is required'],
     },
     date: {
       type: Number,

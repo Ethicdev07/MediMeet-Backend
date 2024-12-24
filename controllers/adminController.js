@@ -28,6 +28,12 @@ const addDoctor = async (req, res)=> {
       return res.json({success: false, message: "Password must be at least 8 characters long"});
     }
 
+     // Check if doctor already exists
+     const existingDoctor = await doctorModel.findOne({ email });
+     if (existingDoctor) {
+       return res.status(409).json({ success: false, message: "Doctor with this email already exists" });
+     }
+
     //hashing doctor password
 
     const salt = await bcrypt.genSalt(10);
@@ -57,11 +63,11 @@ const addDoctor = async (req, res)=> {
     const newDoctor = new doctorModel(doctorData);
     await newDoctor.save();
 
-    res.json({success: true, message: "Doctor added successfully"});
+    res.status(201).json({success: true, message: "Doctor added successfully"});
 
   } catch (error) {
     console.log(error)
-    res.json({success: false, message: error.message});
+    res.status(500).json({success: false, message: error.message});
   }
 }
 
