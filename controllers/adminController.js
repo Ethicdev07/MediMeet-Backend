@@ -93,11 +93,11 @@ const adminLogin = async (req, res) => {
       });
     }
 
-    return res.json({ success: false, message: "Invalid email or password" });
+    return res.status(401).json({ success: false, message: "Invalid email or password" });
   } catch (error) {
     console.error("Login Error:", error.message);
-    return res.json({ success: false, message: error.message });
-  }
+    return res.status(500).json({ success: false, message: error.message });
+  } 
 };
 
 
